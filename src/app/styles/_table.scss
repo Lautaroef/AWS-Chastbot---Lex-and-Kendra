@@ -1,0 +1,154 @@
+.react-table {
+  .columns-visibility {
+    @include flexCenter(flex-start);
+    padding: 0.75rem 0 0.5rem 0;
+    label {
+      margin-right: 1rem;
+    }
+  }
+
+  .draggable-button {
+    @include flexCenter();
+    max-width: max-content;
+    margin: 0.25rem;
+    svg {
+      color: $--black-lighter;
+    }
+  }
+
+  // Table SCSS
+  table {
+    width: 100%;
+    margin-top: 2rem;
+
+    position: relative;
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+  }
+  td {
+    height: 30px;
+    padding: 0.25rem 0;
+  }
+  tr {
+    @include flexCenter(flex-start, stretch);
+    padding: 0 1rem;
+  }
+  thead {
+    th {
+      @include flexCenter();
+      position: relative;
+      padding: 4px 0;
+      min-height: 100%;
+      font-size: $--lg-text; // 0.95rem
+      font-weight: $--font-w-semi-bold;
+      .header-title {
+        flex: 1;
+      }
+      &:not(:last-child) {
+        border-right: 1px solid lightgray;
+      }
+      &.border-right-hidden {
+        border-right: none;
+      }
+
+      > div {
+        max-height: 100%;
+      }
+      .filter-single-column {
+        width: 100%;
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid lightgray;
+    }
+  }
+
+  tbody {
+    font-size: 0.95rem;
+    tr {
+      // if footer present then add border-bottom to last row
+      &:not(:last-child) {
+        border-bottom: $--border-color-lighter;
+      }
+    }
+
+    td {
+      position: relative;
+      text-align: center;
+
+      .utterance-cell {
+        text-align: left;
+      }
+
+      &:not(:last-child) {
+        border-right: $--border-color-lighter;
+      }
+    }
+  }
+
+  tfoot {
+    border-top: $--border-color-lighter;
+    font-size: $--md-text;
+    td {
+      height: fit-content;
+    }
+  }
+
+  /* Column Resizer */
+  .resizer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: col-resize;
+    user-select: none;
+    touch-action: none;
+    opacity: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.disabled-resizing {
+      display: none;
+    }
+
+    &.is-resizing {
+      background: blue;
+      opacity: 1;
+    }
+  }
+  /* End of Column Resizer */
+}
+.table-pagination {
+  @include flexCenter(flex-start);
+  margin-top: 0.25rem;
+
+  .pagination-buttons {
+    @include flexCenter(flex-start, center);
+    > button {
+      margin-right: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border: $--border-input;
+    }
+  }
+  .pages-info {
+    @include flexCenter(flex-start, center);
+    flex: 1;
+
+    > * {
+      margin-right: 0.5rem;
+    }
+  }
+  .select-page-size {
+    cursor: pointer;
+    padding: 0.25rem 0rem 0.25rem 0.35rem;
+    border: $--border-input;
+  }
+
+  .total-selected-rows {
+  }
+}

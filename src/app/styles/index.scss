@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@import "variables";
+@import "mixins";
+@import "report-page";
+@import "table";
+
+body {
+  margin: 0;
+  font-family: Inter;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  transition: all 300ms ease-in;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chat-container {
+  position: relative;
+  max-width: 425px;
+  height: 550px;
+  margin: 2rem auto;
+  padding: 3.5rem 0.2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid $--bg-color;
+  box-shadow: $--box-shadow;
+}
+
+.chat-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $--bg-color;
+  border-bottom: 1px solid #e5e5e5;
+  h3 {
+    padding: 1rem;
+    margin: 0;
+  }
+}
+
+.chat-messages {
+  height: 90%;
+  margin-top: 0.5rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-bottom: $--header-height;
+
+  //   css to make the scroll bar more modern and a bit thinner
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #b3b3b3;
+    border-radius: 1.25rem;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.chat-bubble {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  min-width: 2.5rem;
+  max-width: 80%;
+  padding: 0.25rem 1rem;
+  margin: 0.6rem 0.5rem;
+  //   border-radius: 1.15rem;
+  border-radius: 20px;
+  line-height: 1.5;
+
+  .sender {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding-top: 0.2rem;
+  }
+
+  p {
+    margin: 0;
+    padding: 0.3rem 0 0.15rem 0;
+    font-size: 0.925rem;
+    overflow-wrap: break-word;
+    clear: both;
+  }
+
+  sub {
+    color: #fff;
+    font-size: 0.5rem;
+    align-self: flex-end;
+  }
+
+  &.chat-left {
+    background-color: $--primary;
+    // border-bottom-left-radius: 2px;
+    color: #fff;
+
+    sub {
+      font-size: 0.55rem;
+    }
+  }
+
+  &.chat-right {
+    color: #fff;
+    background-color: $--bubble-right;
+    // border-bottom-right-radius: 2px;
+    margin-left: auto;
+
+    p {
+      align-self: flex-end;
+    }
+
+    sub {
+      font-size: 0.55rem;
+    }
+  }
+}
+
+/********************
+  *  Animation dots
+  ********************/
+
+.stage {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 2rem;
+  margin-top: 1.5rem;
+}
+
+.dot-flashing {
+  &::before,
+  &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $--dot-animation-color;
+  color: $--dot-animation-color;
+  animation: dot-flashing 0.85s infinite linear alternate;
+  animation-delay: 0.5s;
+
+  &::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: $--dot-animation-color;
+    color: $--dot-animation-color;
+    animation: dot-flashing 0.85s infinite alternate;
+    animation-delay: 0s;
+  }
+  &::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: $--dot-animation-color;
+    color: $--dot-animation-color;
+    animation: dot-flashing 0.85s infinite alternate;
+    animation-delay: 1s;
+  }
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color: $--dot-animation-color;
+  }
+  50%,
+  100% {
+    background-color: $--bg-color;
+  }
+}
+
+/* ********************
+  *  End Animation
+  ******************** */
+
+.chat-form {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  form {
+    display: flex;
+  }
+  input {
+    display: flex;
+    flex: 1;
+    border: 0;
+    border-top: 1px solid $--bg-color;
+    border-radius: 0;
+    margin: 0 0.15rem 0.15rem 0.25rem;
+    padding: 0.75rem 1.5rem 0.75rem 1rem;
+    border-bottom: 0;
+  }
+  button {
+    display: flex;
+    flex: 1;
+    max-width: 100px;
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    justify-content: center;
+    color: #fff;
+    background-color: $--primary;
+    border: 0;
+    border-radius: 0;
+  } /*# sourceMappingURL=index.css.map */
+}

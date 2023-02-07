@@ -1,91 +1,134 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
+"use client";
+import * as AWS from "aws-sdk";
+import AWS_CONFIG from "../config/aws";
 
-const inter = Inter({ subsets: ['latin'] })
+import { useRef, useState, useEffect } from "react";
+import dayjs from "dayjs";
+import axios from "axios";
 
-export default function Home() {
+AWS.config.region = AWS_CONFIG.region;
+AWS.config.credentials = new AWS.Credentials({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+});
+
+function App() {
+  const date = new Date();
+  const [inputValue, setInputValue] = useState<string>("");
+  const [conversation, setConversation] = useState([
+    {
+      message: "👋 Welcome to the chat! Ask me a question.",
+      by: "Lex",
+      date: date.toISOString(),
+    },
+  ]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const sessionId = new Date().getTime().toString();
+  const conversationRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to bottom of conversation window on new message
+  useEffect(() => {
+    conversationRef.current?.scrollTo(0, conversationRef.current?.scrollHeight);
+  }, [conversation]);
+
+  const pushConversation = (conversation: Conversation) => {
+    setConversation((prev) => [...prev, conversation]);
+  };
+
+  // Call the Lambda function from my API to get the response from Lex or Kendra
+  const getResponse = async (question: string) => {
+    const params = {
+      question,
+      sessionId,
+    };
+
+    setIsLoading(true);
+    const { data }: { data: APIResponse } = await axios
+      .get("/api/get-lambda-response", {
+        params,
+      })
+      .finally(() => setIsLoading(false));
+
+    return data;
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Validate input
+    if (!inputValue) {
+      return inputRef.current?.focus();
+    }
+    if (inputValue.length < 2) {
+      return pushConversation({
+        message: "Please enter a valid question",
+        by: "Lex",
+        date: date.toISOString(),
+      });
+    }
+
+    // Add the user's question to the conversation
+    pushConversation({
+      message: inputValue,
+      by: "You",
+      date: date.toISOString(),
+    });
+
+    // Call the Lambda function to get the response from Lex or Kendra
+    getResponse(inputValue).then((data) => {
+      pushConversation({
+        message: data.message,
+        by: data.transmitter,
+        date: date.toISOString(),
+      });
+    });
+    setInputValue("");
+    inputRef.current?.focus();
+  };
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <main className="container">
+      <div className="chat-container">
+        <div className="chat-header">
+          <h3>Chatbot with Lex and Kendra</h3>
+        </div>
+        <div className="chat-messages" ref={conversationRef}>
+          {conversation.map(({ message, date, by }, i) => (
+            <div
+              key={i}
+              className={`chat-bubble ${by !== "You" ? "chat-left" : "chat-right"}`}
+            >
+              <span className="sender">{by}</span>
+              <p>{message}</p>
+              <sub>{dayjs(date).format("HH:mm a")}</sub>
+            </div>
+          ))}
+
+          {isLoading && (
+            <div className="stage">
+              <div className="dot-flashing"></div>
+            </div>
+          )}
+        </div>
+        <div className="chat-form">
+          <form onSubmit={onSubmit}>
+            <input
+              type="text"
+              name="message"
+              id="message"
+              placeholder="Write your question here..."
+              autoComplete="off"
+              ref={inputRef}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
-          </a>
+            <button type="submit">Ask</button>
+          </form>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
       </div>
     </main>
-  )
+  );
 }
+
+export default App;

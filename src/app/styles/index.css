@@ -1,0 +1,363 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+.report-page {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.react-table {
+  /* Column Resizer */
+  /* End of Column Resizer */
+}
+.react-table .columns-visibility {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  padding: 0.75rem 0 0.5rem 0;
+}
+.react-table .columns-visibility label {
+  margin-right: 1rem;
+}
+.react-table .draggable-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  margin: 0.25rem;
+}
+.react-table .draggable-button svg {
+  color: #757575;
+}
+.react-table table {
+  width: 100%;
+  margin-top: 2rem;
+  position: relative;
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+}
+.react-table td {
+  height: 30px;
+  padding: 0.25rem 0;
+}
+.react-table tr {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row;
+  padding: 0 1rem;
+}
+.react-table thead th {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  position: relative;
+  padding: 4px 0;
+  min-height: 100%;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.react-table thead th .header-title {
+  flex: 1;
+}
+.react-table thead th:not(:last-child) {
+  border-right: 1px solid lightgray;
+}
+.react-table thead th.border-right-hidden {
+  border-right: none;
+}
+.react-table thead th > div {
+  max-height: 100%;
+}
+.react-table thead th .filter-single-column {
+  width: 100%;
+}
+.react-table thead tr {
+  border-bottom: 1px solid lightgray;
+}
+.react-table tbody {
+  font-size: 0.95rem;
+}
+.react-table tbody tr:not(:last-child) {
+  border-bottom: #eceef0;
+}
+.react-table tbody td {
+  position: relative;
+  text-align: center;
+}
+.react-table tbody td .utterance-cell {
+  text-align: left;
+}
+.react-table tbody td:not(:last-child) {
+  border-right: #eceef0;
+}
+.react-table tfoot {
+  border-top: #eceef0;
+  font-size: 0.85rem;
+}
+.react-table tfoot td {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.react-table .resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: col-resize;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  touch-action: none;
+  opacity: 0;
+}
+.react-table .resizer:hover {
+  opacity: 1;
+}
+.react-table .resizer.disabled-resizing {
+  display: none;
+}
+.react-table .resizer.is-resizing {
+  background: blue;
+  opacity: 1;
+}
+
+.table-pagination {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 0.25rem;
+}
+.table-pagination .pagination-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+.table-pagination .pagination-buttons > button {
+  margin-right: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #d0d7de;
+}
+.table-pagination .pages-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex: 1;
+}
+.table-pagination .pages-info > * {
+  margin-right: 0.5rem;
+}
+.table-pagination .select-page-size {
+  cursor: pointer;
+  padding: 0.25rem 0rem 0.25rem 0.35rem;
+  border: 1px solid #d0d7de;
+}
+body {
+  margin: 0;
+  font-family: Inter;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  transition: all 300ms ease-in;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chat-container {
+  position: relative;
+  max-width: 425px;
+  height: 550px;
+  margin: 2rem auto;
+  padding: 3.5rem 0.2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #ececec;
+  box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 18px 0px;
+}
+
+.chat-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ececec;
+  border-bottom: 1px solid #e5e5e5;
+}
+.chat-header h3 {
+  padding: 1rem;
+  margin: 0;
+}
+
+.chat-messages {
+  height: 90%;
+  margin-top: 0.5rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 3.75rem;
+}
+.chat-messages::-webkit-scrollbar {
+  width: 0.5rem;
+}
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #b3b3b3;
+  border-radius: 1.25rem;
+}
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.chat-bubble {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 2.5rem;
+  max-width: 80%;
+  padding: 0.25rem 1rem;
+  margin: 0.6rem 0.5rem;
+  border-radius: 20px;
+  line-height: 1.5;
+}
+.chat-bubble .sender {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding-top: 0.2rem;
+}
+.chat-bubble p {
+  margin: 0;
+  padding: 0.3rem 0 0.15rem 0;
+  font-size: 0.925rem;
+  overflow-wrap: break-word;
+  clear: both;
+}
+.chat-bubble sub {
+  color: #fff;
+  font-size: 0.5rem;
+  align-self: flex-end;
+}
+.chat-bubble.chat-left {
+  background-color: #eb5f07;
+  color: #fff;
+}
+.chat-bubble.chat-left sub {
+  font-size: 0.55rem;
+}
+.chat-bubble.chat-right {
+  color: #fff;
+  background-color: #696969;
+  margin-left: auto;
+}
+.chat-bubble.chat-right p {
+  align-self: flex-end;
+}
+.chat-bubble.chat-right sub {
+  font-size: 0.55rem;
+}
+
+/********************
+  *  Animation dots
+  ********************/
+.stage {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 2rem;
+  margin-top: 1.5rem;
+}
+
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #eb5f07;
+  color: #eb5f07;
+  animation: dot-flashing 0.85s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+.dot-flashing::before, .dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #eb5f07;
+  color: #eb5f07;
+  animation: dot-flashing 0.85s infinite alternate;
+  animation-delay: 0s;
+}
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #eb5f07;
+  color: #eb5f07;
+  animation: dot-flashing 0.85s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color: #eb5f07;
+  }
+  50%, 100% {
+    background-color: #ececec;
+  }
+}
+/* ********************
+  *  End Animation
+  ******************** */
+.chat-form {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+}
+.chat-form form {
+  display: flex;
+}
+.chat-form input {
+  display: flex;
+  flex: 1;
+  border: 0;
+  border-top: 1px solid #ececec;
+  border-radius: 0;
+  margin: 0 0.15rem 0.15rem 0.25rem;
+  padding: 0.75rem 1.5rem 0.75rem 1rem;
+  border-bottom: 0;
+}
+.chat-form button {
+  display: flex;
+  flex: 1;
+  max-width: 100px;
+  padding: 0.75rem 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  justify-content: center;
+  color: #fff;
+  background-color: #eb5f07;
+  border: 0;
+  border-radius: 0;
+}/*# sourceMappingURL=index.css.map */
