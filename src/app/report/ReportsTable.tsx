@@ -47,8 +47,8 @@ function Reports({ data }: Props) {
         be used to retrieve the following page.
       </p>
       <small>
-        So yes, a little more work to do. Time flies so fast, I'm sure I'll find the time
-        somehow. :)
+        So yes, a little more work to do. Time flies so fast, I&apos;m sure I&apos;ll find the
+        time somehow. :)
       </small>
     </div>
   );

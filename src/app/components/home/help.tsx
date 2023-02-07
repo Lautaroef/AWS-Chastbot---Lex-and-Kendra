@@ -20,8 +20,8 @@ function Help() {
           </ul>
           <p>
             {/* This question will answer kendra */}
-            If the chatbot is unable to find a match, it will use AWS Kendra's data source to
-            find an answer to the question. (+300 questions and answers)
+            If the chatbot is unable to find a match, it will use AWS Kendra&apos; data source
+            to find an answer to the question. (+300 questions and answers)
           </p>
           <p>
             Example: <i>What is a young giraffe called?</i>
