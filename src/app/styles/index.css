@@ -169,15 +169,23 @@ body {
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  margin: auto;
+  margin-top: 1.5rem;
+  position: relative;
+}
+.container svg {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.25);
 }
 
 .chat-container {
   position: relative;
   max-width: 425px;
   height: 550px;
-  margin: 2rem auto;
   padding: 3.5rem 0.2rem;
   border-radius: 1rem;
   overflow: hidden;
@@ -360,4 +368,32 @@ body {
   background-color: #eb5f07;
   border: 0;
   border-radius: 0;
+  cursor: pointer;
+}
+
+.side-panel-helper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 400px;
+  padding: 0 0.75rem 1rem 0.75rem;
+}
+.side-panel-helper svg {
+  color: rgba(0, 0, 0, 0.25);
+}
+.side-panel-helper .subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.side-panel-helper h4 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.35rem;
+  padding-top: 0.75rem;
+  font-size: 1.25rem;
+  border-top: 1px solid #e7e8e8;
+}
+.side-panel-helper p {
+  margin: 10px 0;
+  font-size: 0.85rem;
+  color: #505050;
 }/*# sourceMappingURL=index.css.map */

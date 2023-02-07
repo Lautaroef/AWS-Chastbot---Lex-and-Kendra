@@ -2,7 +2,6 @@ import AWS from "aws-sdk";
 import AWS_CONFIG from "@/config/aws";
 import Reports from "./ReportsTable";
 
-// AWS.config.region = AWS_CONFIG.region;
 // AWS.config.credentials = new AWS.Credentials({
 //   accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
 //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,

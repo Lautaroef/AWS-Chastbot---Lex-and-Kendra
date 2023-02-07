@@ -3,9 +3,11 @@ import * as AWS from "aws-sdk";
 import AWS_CONFIG from "../config/aws";
 
 import { useRef, useState, useEffect } from "react";
-import dayjs from "dayjs";
 import axios from "axios";
+import Chatbot from "./components/home/Chatbot";
+import Help from "./components/home/help";
 
+// Set the AWS credentials
 AWS.config.region = AWS_CONFIG.region;
 AWS.config.credentials = new AWS.Credentials({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
@@ -24,8 +26,8 @@ function App() {
   ]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const inputRef = useRef<HTMLInputElement>(null);
   const sessionId = new Date().getTime().toString();
+  const inputRef = useRef<HTMLInputElement>(null);
   const conversationRef = useRef<HTMLDivElement>(null);
 
   // Scroll to bottom of conversation window on new message
@@ -93,40 +95,17 @@ function App() {
         <div className="chat-header">
           <h3>Chatbot with Lex and Kendra</h3>
         </div>
-        <div className="chat-messages" ref={conversationRef}>
-          {conversation.map(({ message, date, by }, i) => (
-            <div
-              key={i}
-              className={`chat-bubble ${by !== "You" ? "chat-left" : "chat-right"}`}
-            >
-              <span className="sender">{by}</span>
-              <p>{message}</p>
-              <sub>{dayjs(date).format("HH:mm a")}</sub>
-            </div>
-          ))}
-
-          {isLoading && (
-            <div className="stage">
-              <div className="dot-flashing"></div>
-            </div>
-          )}
-        </div>
-        <div className="chat-form">
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              name="message"
-              id="message"
-              placeholder="Write your question here..."
-              autoComplete="off"
-              ref={inputRef}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-            <button type="submit">Ask</button>
-          </form>
-        </div>
+        <Chatbot
+          conversation={conversation}
+          onSubmit={onSubmit}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          isLoading={isLoading}
+          inputRef={inputRef}
+          conversationRef={conversationRef}
+        />
       </div>
+      <Help />
     </main>
   );
 }
