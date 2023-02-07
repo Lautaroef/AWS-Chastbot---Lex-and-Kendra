@@ -1,3 +1,5 @@
+// "use client"
+import { Spoiler } from "@mantine/core";
 import { IoHelpBuoy } from "react-icons/io5";
 
 function Help() {
@@ -26,16 +28,40 @@ function Help() {
           <p>
             Example: <i>What is a young giraffe called?</i>
           </p>
+
+          <Spoiler maxHeight={35} showLabel="Show more" hideLabel="Hide" className="spoiler">
+            {/* <hr
+              style={{
+                marginTop: "1.75rem",
+                marginBottom: "1em",
+              }}
+            /> */}
+            <p>You can ask any of the questions listed on these websites</p>-{" "}
+            <a href="https://kwizzbit.com/50-general-knowledge-quiz-questions-and-answers/">
+              50 General Knowledge Quiz Questions and Answers
+            </a>
+            <br />-{" "}
+            <a href="https://www.mentimeter.com/blog/audience-energizers/55-free-trivia-and-fun-quiz-question-templates">
+              55 Trivia and Fun Quiz Questions
+            </a>
+            <br />-{" "}
+            <a href="https://www.radiotimes.com/quizzes/pub-quiz-general-knowledge/">
+              200 Quiz Questions and Answers
+            </a>
+            <br />-{" "}
+            <a href="https://www.cosmopolitan.com/uk/worklife/a32388181/best-general-knowledge-quiz-questions/">
+              105 General Knowledge Quiz Questions
+            </a>
+          </Spoiler>
           <h3>Technical Details</h3>
           <p>
             Every time a question is asked, the chatbot will call a Lambda function which
             contains the logic about first calling Lex and if it fails, then calling Kendra.
           </p>
           <p>
-            For the report, I have used AWS Cloudwatch to monitor the Lex utterances. This can
-            be seen at <a href="/report">/report</a>.
+            For the <b>report</b>, I have used AWS Cloudwatch to monitor the Lex utterances.
+            This can be seen at <a href="/report">/report</a>.
           </p>
-
           <small>To be improved...</small>
         </section>
       </div>

@@ -258,3 +258,7 @@ body {
     color: $--black-medium;
   }
 }
+
+.spoiler {
+  text-overflow: ellipsis;
+}
